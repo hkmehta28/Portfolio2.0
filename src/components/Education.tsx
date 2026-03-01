@@ -102,7 +102,7 @@ export function Education() {
                 </p>
               </div>
               <div className="shrink-0 pt-1">
-                <span className="inline-block px-5 py-2 rounded-full bg-white/5 border border-white/10 text-gray-400 font-bold tracking-wider uppercase transition-all duration-300 group-hover:bg-emerald-500/10 group-hover:border-emerald-500/50 group-hover:text-emerald-400 group-hover:shadow-[0_0_15px_rgba(16,185,129,0.15)]">
+                <span className="inline-block px-5 py-2 rounded-full bg-emerald-500 text-white border border-emerald-500/50 font-bold tracking-wider uppercase shadow-[0_0_15px_rgba(16,185,129,0.15)]">
                   Apr 2022
                 </span>
               </div>
@@ -130,7 +130,7 @@ export function Education() {
                 </p>
               </div>
               <div className="shrink-0 pt-1">
-                <span className="inline-block px-5 py-2 rounded-full bg-white/5 border border-white/10 text-gray-400 font-bold tracking-wider uppercase transition-all duration-300 group-hover:bg-emerald-500/10 group-hover:border-emerald-500/50 group-hover:text-emerald-400 group-hover:shadow-[0_0_15px_rgba(16,185,129,0.15)]">
+                <span className="inline-block px-5 py-2 rounded-full bg-emerald-500 text-white border border-emerald-500/50 font-bold tracking-wider uppercase shadow-[0_0_15px_rgba(16,185,129,0.15)]">
                   Mar 2020
                 </span>
               </div>

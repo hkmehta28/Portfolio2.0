@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import { ScrollyCanvas } from "@/components/ScrollyCanvas";
 import { Overlay } from "@/components/Overlay";
 import { Projects } from "@/components/Projects";
@@ -10,16 +13,26 @@ import { Preloader } from "@/components/Preloader";
 import { Footer } from "@/components/Footer";
 
 export default function Home() {
+  const [loadProgress, setLoadProgress] = useState(0);
+  const [isLoaded, setIsLoaded] = useState(false);
+
   return (
     <main className="bg-[#121212] min-h-screen text-white selection:bg-emerald-500/30 selection:text-white">
-      <Preloader />
+      <Preloader actualProgress={loadProgress} isLoaded={isLoaded} />
+      
       <section className="relative w-full">
         {/* 
           totalFrames should equal the length of image sequence.
           Currently our folder has 192 frames for the complete sequence. 
           If you update the sequence length, modify totalFrames.
         */}
-        <ScrollyCanvas totalFrames={192} />
+        <ScrollyCanvas 
+          totalFrames={192} 
+          onLoadProgress={(progress, complete) => {
+            setLoadProgress(progress);
+            if (complete) setIsLoaded(true);
+          }}
+        />
         <Overlay />
       </section>
       
