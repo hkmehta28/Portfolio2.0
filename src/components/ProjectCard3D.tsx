@@ -56,6 +56,7 @@ export function ProjectCard3D({ project, onClick, index }: { project: any, onCli
       onMouseLeave={handleMouseLeave}
       onClick={onClick}
       style={{
+        perspective: 1500,
         rotateX,
         rotateY,
         transformStyle: "preserve-3d", // Required for 3D children

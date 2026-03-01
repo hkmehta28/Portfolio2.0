@@ -71,8 +71,8 @@ export function Projects() {
           </p>
         </div>
 
-        {/* Projects Grid (With 3D Perspective) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" style={{ perspective: "1500px" }}>
+        {/* Projects Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {PROJECTS.map((project, index) => (
             <ProjectCard3D 
               key={project.id} 
