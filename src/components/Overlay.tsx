@@ -69,7 +69,7 @@ export function Overlay() {
             className="px-5 py-1.5 border border-emerald-500/30 rounded-full bg-emerald-500/10 backdrop-blur-md mb-8 shadow-[0_0_30px_rgba(16,185,129,0.2)]"
           >
             <span className="text-emerald-400 text-xs font-bold tracking-[0.25em] uppercase">
-              Software Engineer
+              Portfolio
             </span>
           </motion.div>
 
