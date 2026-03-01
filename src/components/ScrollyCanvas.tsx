@@ -23,6 +23,11 @@ export function ScrollyCanvas({
   const currentIndex = useTransform(scrollYProgress, [0, 1], [0, totalFrames - 1]);
 
   // Progressive image loading (Apple/Stripe technique)
+  const onProgressRef = useRef(onLoadProgress);
+  useEffect(() => {
+    onProgressRef.current = onLoadProgress;
+  }, [onLoadProgress]);
+
   useEffect(() => {
     let isCancelled = false;
     let loadedCount = 0;
@@ -40,16 +45,16 @@ export function ScrollyCanvas({
             if (!isCancelled) {
                imagesRef.current[index] = img;
                loadedCount++;
-               if (onLoadProgress) {
+               if (onProgressRef.current) {
                  // Calculate progress % but ensure the preloader fully hides once Frame 0 is done
                  const progress = (loadedCount / totalFrames) * 100;
                  if (index === 0) {
                      // The moment Frame 0 is loaded, tell the parent the site is ready to interact with
-                     onLoadProgress(100, true);
+                     onProgressRef.current(100, true);
                      // Render immediately so frame 0 paints before scroll
                      requestAnimationFrame(() => renderFrame(0));
                  } else {
-                     onLoadProgress(progress, false); // Still loading others quietly in background
+                     onProgressRef.current(progress, false); // Still loading others quietly in background
                  }
                }
             }
@@ -96,7 +101,7 @@ export function ScrollyCanvas({
     return () => {
       isCancelled = true;
     };
-  }, [totalFrames, onLoadProgress]);
+  }, [totalFrames]);
 
   // Render function with Closest-Frame Fallback
   const renderFrame = (targetIndex: number) => {
