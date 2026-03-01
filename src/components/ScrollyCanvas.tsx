@@ -66,10 +66,26 @@ export function ScrollyCanvas({
       // Step 1: Force load the initial frame so the canvas isn't blank
       await loadSingleFrame(0);
       
-      // Step 2: Loop sequentially and load frames in the background without blocking the UI
-      for (let i = 1; i < totalFrames; i++) {
+      // Step 2: Progressive loading for smoother scrollytelling
+      const passes = [
+        // Pass 1: Every 12th frame (quick rough scrub)
+        Array.from({length: Math.ceil(totalFrames / 12)}, (_, i) => i * 12).filter(i => i !== 0 && i < totalFrames),
+        // Pass 2: Every 6th frame
+        Array.from({length: Math.ceil(totalFrames / 6)}, (_, i) => i * 6).filter(i => i % 12 !== 0 && i < totalFrames),
+        // Pass 3: Every 3rd frame
+        Array.from({length: Math.ceil(totalFrames / 3)}, (_, i) => i * 3).filter(i => i % 6 !== 0 && i < totalFrames),
+        // Pass 4: The rest
+        Array.from({length: totalFrames}, (_, i) => i).filter(i => i % 3 !== 0 && i !== 0 && i < totalFrames),
+      ];
+
+      for (const pass of passes) {
         if (isCancelled) break;
-        await loadSingleFrame(i);
+        const batchSize = 6;
+        for (let i = 0; i < pass.length; i += batchSize) {
+          if (isCancelled) break;
+          const batch = pass.slice(i, i + batchSize);
+          await Promise.all(batch.map(idx => loadSingleFrame(idx)));
+        }
       }
     };
 
@@ -90,30 +106,27 @@ export function ScrollyCanvas({
     let imgToDraw = null;
     let actualDrawIndex = -1;
 
-    // Search backwards for the most recent loaded frame
-    for (let i = targetIndex; i >= 0; i--) {
-        if (imagesRef.current[i]) {
-            imgToDraw = imagesRef.current[i];
-            actualDrawIndex = i;
+    let offset = 0;
+    while (offset < totalFrames) {
+        // Search backwards
+        if (targetIndex - offset >= 0 && imagesRef.current[targetIndex - offset]) {
+            imgToDraw = imagesRef.current[targetIndex - offset];
+            actualDrawIndex = targetIndex - offset;
             break;
         }
-    }
-    
-    // If we scroll so fast we beat Frame 0, search forwards as an absolute fallback
-    if (!imgToDraw) {
-        for (let i = targetIndex + 1; i < totalFrames; i++) {
-            if (imagesRef.current[i]) {
-                imgToDraw = imagesRef.current[i];
-                actualDrawIndex = i;
-                break;
-            }
+        // Search forwards if no backwards frame is found within this offset
+        if (targetIndex + offset < totalFrames && imagesRef.current[targetIndex + offset]) {
+            imgToDraw = imagesRef.current[targetIndex + offset];
+            actualDrawIndex = targetIndex + offset;
+            break;
         }
+        offset++;
     }
 
     if (!imgToDraw) return;
     
     const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d", { alpha: false });
     if (!ctx) return;
 
     if (imgToDraw.complete && imgToDraw.naturalHeight !== 0) {
@@ -134,7 +147,8 @@ export function ScrollyCanvas({
         yOffset = 0;
       }
 
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#121212';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
       ctx.drawImage(imgToDraw, xOffset, yOffset, renderWidth, renderHeight);
       
       // Sync our tracker cache with what was actually drawn
@@ -163,12 +177,18 @@ export function ScrollyCanvas({
     return () => window.removeEventListener("resize", handleResize);
   }, [currentIndex]); // Removed 'images' from dependency array since they are refs now
 
+  // Track the rAF to prevent multiple queued renders
+  const rafId = useRef<number | null>(null);
+
   // Update canvas when scroll changes
   useMotionValueEvent(currentIndex, "change", (latest) => {
     const targetIndex = Math.round(latest);
     // Don't try to redraw if we know we already just drew this exact frame index
     if (targetIndex !== lastRenderedIndex.current) {
-      requestAnimationFrame(() => {
+      if (rafId.current !== null) {
+        cancelAnimationFrame(rafId.current);
+      }
+      rafId.current = requestAnimationFrame(() => {
         renderFrame(targetIndex);
       });
     }
