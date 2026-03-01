@@ -60,12 +60,17 @@ export function ScrollyCanvas({ totalFrames = 6 }: { totalFrames?: number }) {
     }
   };
 
+  // Track the last rendered frame to prevent duplicate draw calls for the same image index
+  const lastRenderedIndex = useRef(-1);
+
   // Resize handler
   useEffect(() => {
     const handleResize = () => {
       if (canvasRef.current) {
         canvasRef.current.width = window.innerWidth;
         canvasRef.current.height = window.innerHeight;
+        // On resize, force a render
+        lastRenderedIndex.current = -1; 
         renderFrame(Math.round(currentIndex.get()));
       }
     };
@@ -78,7 +83,14 @@ export function ScrollyCanvas({ totalFrames = 6 }: { totalFrames?: number }) {
 
   // Update canvas when scroll changes
   useMotionValueEvent(currentIndex, "change", (latest) => {
-    renderFrame(Math.round(latest));
+    const nextIndex = Math.round(latest);
+    if (nextIndex !== lastRenderedIndex.current) {
+      // Use requestAnimationFrame for smoother painting on mobile and slow devices
+      requestAnimationFrame(() => {
+        renderFrame(nextIndex);
+        lastRenderedIndex.current = nextIndex;
+      });
+    }
   });
 
   // Re-render when images are loaded to show the first frame immediately
