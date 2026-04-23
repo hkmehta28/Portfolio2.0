@@ -37,30 +37,52 @@ export function Chatbot() {
     scrollToBottom();
   }, [messages, isTyping, isOpen]);
 
-  const handleSendMessage = (e: React.FormEvent) => {
+  const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!inputValue.trim()) return;
 
+    const userText = inputValue.trim();
     const userMessage: Message = {
       id: Date.now().toString(),
       sender: "user",
-      text: inputValue.trim(),
+      text: userText,
     };
 
     setMessages((prev) => [...prev, userMessage]);
     setInputValue("");
     setIsTyping(true);
 
-    // Simulate network request for the bot response
-    setTimeout(() => {
+    try {
+      const response = await fetch("http://127.0.0.1:8000/ask", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ question: userText }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to get response");
+      }
+
+      const data = await response.json();
       const botResponse: Message = {
         id: (Date.now() + 1).toString(),
         sender: "bot",
-        text: STATIC_RESPONSES[Math.floor(Math.random() * STATIC_RESPONSES.length)],
+        text: data.answer || "I am sorry, I could not process your request.",
       };
       setMessages((prev) => [...prev, botResponse]);
+    } catch (error) {
+      console.error("Chatbot API Error:", error);
+      const errorResponse: Message = {
+        id: (Date.now() + 1).toString(),
+        sender: "bot",
+        text: "I'm having trouble connecting to my brain right now. Please try again later.",
+      };
+      setMessages((prev) => [...prev, errorResponse]);
+    } finally {
       setIsTyping(false);
-    }, 1500 + Math.random() * 1000); // 1.5s to 2.5s delay
+    }
   };
 
   return (
@@ -158,7 +180,7 @@ export function Chatbot() {
                 </button>
               </form>
               <div className="text-center mt-2">
-                 <span className="text-[10px] text-gray-600 font-medium">RAG Workflow currently in development</span>
+                 <span className="text-[10px] text-emerald-600/80 font-medium">Powered by AI & RAG</span>
               </div>
             </div>
           </motion.div>

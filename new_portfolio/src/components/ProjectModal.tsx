@@ -22,11 +22,14 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
+      document.documentElement.style.overflow = 'unset';
     }
     return () => {
       document.body.style.overflow = 'unset';
+      document.documentElement.style.overflow = 'unset';
     };
   }, [isOpen]);
 
@@ -48,18 +51,21 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={onClose}
-            className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm"
+            className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm"
           />
           
           {/* Modal Overlay container */}
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-12 pointer-events-none">
+          <div 
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-12"
+            onClick={onClose}
+          >
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 40 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="w-full max-w-5xl max-h-[90vh] overflow-y-auto bg-[#121212]/95 backdrop-blur-xl border border-white/10 rounded-[2rem] shadow-2xl pointer-events-auto flex flex-col relative"
+              onClick={(e) => e.stopPropagation()}
+              className="w-full max-w-5xl max-h-[90vh] bg-[#121212]/95 backdrop-blur-xl border border-white/10 rounded-[2rem] shadow-2xl flex flex-col relative overflow-hidden"
             >
               
               {/* Close Button */}
@@ -72,8 +78,10 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                 </svg>
               </button>
 
-              {/* Cover Image Header */}
-              <div className="relative h-64 sm:h-80 w-full overflow-hidden shrink-0">
+              {/* Inner Scrollable Container */}
+              <div className="overflow-y-auto overflow-x-hidden w-full flex-1 min-h-0 overscroll-contain">
+                {/* Cover Image Header */}
+                <div className="relative h-64 sm:h-80 w-full shrink-0">
                 <div 
                   className="absolute inset-0 bg-cover bg-center"
                   style={{ backgroundImage: `url(${project.image})` }}
@@ -152,6 +160,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
 
                 </div>
 
+                </div>
               </div>
             </motion.div>
           </div>

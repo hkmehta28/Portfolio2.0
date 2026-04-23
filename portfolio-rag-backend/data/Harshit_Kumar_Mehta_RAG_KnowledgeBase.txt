@@ -1,0 +1,149 @@
+Harshit Kumar Mehta
+Generative AI Engineer | Final-Year B.Tech CSE | Chandigarh University
+1. Identity & Contact Information
+Full Name: Harshit Kumar Mehta
+Location: Chandigarh, India
+Phone: +91 8360449335
+Email: hkmehta2874@gmail.com
+GitHub: github.com/hkmehta28
+LinkedIn: linkedin.com/in/hkmehta28
+Portfolio: https://portfolio2-0-eta-blue.vercel.app/
+2. Who Is Harshit — Personal Bio
+Harshit is a final-year Computer Science & Engineering student at Chandigarh University who identifies as
+a Generative AI Engineer. He is a playful, jolly person who knows when to be serious. He is funny, helpful,
+and deeply curious — three words his friends would use to describe him.
+Harshit got into Generative AI entirely out of self-driven curiosity. He started exploring LLMs and AI
+independently, without being pushed by coursework or a mentor — his passion for the field led the way.
+He taught himself LangChain, RAG pipelines, vector databases, and prompt engineering by building real
+projects.
+He speaks four languages: Hindi, English, Bengali, and Maithili.
+Currently reading: Gita for GenZ — a modern retelling of the Bhagavad Gita. He enjoys self-help and
+personal development books, tech non-fiction, and fiction novels.
+3. Personality, Interests & Hobbies
+Personality
+(cid:127) Playful and jolly, but understands seriousness when needed
+(cid:127) Fast learner who is largely self-taught
+(cid:127) Problem-solver who digs deep rather than surface-skimming
+(cid:127) Team collaborator but also capable of working independently
+(cid:127) Detail-oriented with a big-picture mindset
+Hobbies
+Harshit's biggest passion outside of coding is Badminton — he loves it. He also reads books across
+genres and is completely obsessed with Formula 1 racing.
+
+Formula 1
+Harshit is a massive Formula 1 fan. His favorite driver as a person is Daniel Ricciardo, known for his
+charisma and infectious smile. He supports Lewis Hamilton and the Scuderia Ferrari team. He previously
+supported Mercedes due to his admiration for Hamilton, and switched allegiance to Ferrari when Hamilton
+made the historic move.
+4. Professional Profile
+Harshit is a Generative AI Engineer and final-year Computer Science undergraduate specializing in Large
+Language Models (LLMs), Retrieval-Augmented Generation (RAG), and NLP-based AI applications. He is
+experienced in designing scalable AI systems using LangChain, OpenAI GPT models, vector databases,
+and RESTful APIs. He has a strong foundation in backend development, semantic search,
+embedding-based retrieval, and full-stack architecture.
+His core philosophy: elegant engineering solves complex problems.
+Job Seeking Status
+Actively applying and available immediately for the right opportunity.
+Open to: Remote, On-site in Chandigarh/nearby, On-site anywhere in India (relocation is fine), Internship,
+and Full-time roles.
+Target roles: Generative AI Engineer, AI Engineer, LLM Engineer, and related positions in any company
+working in the AI/GenAI space.
+5. Technical Skills
+Programming Languages: Python, JavaScript, C++, Java
+AI & LLM Technologies: LangChain, OpenAI API, RAG (Retrieval-Augmented Generation), Embeddings,
+Vector Similarity Search, Prompt Engineering, Semantic Search
+Vector Databases: Pinecone, ChromaDB
+Frameworks & Libraries: LangChain, Streamlit, React.js, Node.js, Express.js, Tailwind CSS
+Databases: PostgreSQL, SQL, Pinecone, ChromaDB
+Tools & Platforms: Git, GitHub, Swagger/OpenAPI, Vercel
+Currently Learning: LangGraph, HuggingFace Transformers, FastAPI, Docker, Cloud platforms
+(AWS/Azure/GCP)
+6. Projects
+6.1 Intelligent Document Q&A; System (RAG-Based LLM Application)
+
+This was Harshit's personal idea — built because he wanted hands-on experience with RAG after learning
+the concepts. He wanted to build something real and impactful, not just a tutorial project.
+(cid:127) Architected a RAG system using LangChain and OpenAI GPT APIs to enable context-aware question
+answering across 100+ documents.
+(cid:127) Engineered an end-to-end ingestion pipeline processing 10,000+ text chunks with semantic chunking
+and embedding generation using Pinecone and ChromaDB.
+(cid:127) Optimized embedding-based semantic search with dynamic context injection, improving response
+relevance by 30% and reducing hallucinated outputs.
+(cid:127) Integrated conversational memory and real-time query handling through Streamlit, reducing query
+latency by 25%.
+Tech Stack: LangChain, OpenAI API, Pinecone, ChromaDB, Streamlit, Python
+6.2 Conversational AI & Text Summarization System
+Built to demonstrate multi-turn conversational AI capabilities and automated summarization pipelines — a
+use case directly relevant to enterprise content workflows.
+(cid:127) Built a multi-turn conversational AI application supporting 50+ concurrent queries using LangChain
+and GPT APIs.
+(cid:127) Orchestrated modular LLM chains to automate summarization workflows, reducing manual content
+processing time by 40%.
+(cid:127) Enhanced semantic accuracy through prompt engineering, improving contextual response
+consistency by 20%.
+(cid:127) Structured scalable LLM pipelines enabling modular AI deployment across multiple use cases.
+Tech Stack: LangChain, OpenAI GPT APIs, Python, Streamlit
+6.3 Foodie Master (Full-Stack Web Application)
+A group project for an online food ordering platform — Harshit handled the full-stack architecture and API
+design. He has a future vision for this project: building an agentic AI chatbot that understands customer
+mood and food preferences to assist with placing and modifying orders in real-time. This chatbot will be
+built using LangGraph once he has a strong command over agentic AI technologies.
+(cid:127) Delivered a full-stack web application using React.js, Node.js, Express.js, and PostgreSQL to
+streamline online ordering workflows.
+(cid:127) Established secure RESTful APIs with JWT-based authentication for protected transactions and
+session management.
+(cid:127) Streamlined backend services and database schema for maintainable and scalable architecture.
+(cid:127) Documented API endpoints using Swagger/OpenAPI to improve collaboration and system
+transparency.
+Tech Stack: React.js, Node.js, Express.js, PostgreSQL, JWT, REST APIs, Swagger/OpenAPI
+7. Education
+
+Bachelor of Engineering in Computer Science & Engineering
+Chandigarh University, Chandigarh | Expected Graduation: June 2026
+Class XII: Jawaharlal Nehru Memorial Senior Secondary School | Apr 2022
+Class X: De Nobili School, Maithon | Mar 2020
+8. Certifications
+LangChain Mastery: Build GenAI Apps with LangChain & Pinecone
+Issued by: Udemy | Date: February 2026
+Built LLM-powered applications using LangChain, OpenAI API, Pinecone, and RAG for semantic search
+and document Q&A; systems.
+.NET Full-Stack Development Program
+Issued by: Wipro TalentNext, Chandigarh University | Date: October 2025
+Developed full-stack applications using C#, ASP.NET, JavaScript, SQL, and RESTful APIs with focus on
+backend architecture and database integration.
+Full-Stack Web Developer Course
+Issued by: Udemy | Date: January 2025
+Implemented frontend and backend systems using React.js, Node.js, Express.js, PostgreSQL, and
+JWT-based authentication.
+9. Career Vision & Goals
+Harshit's long-term vision is to be well-settled in the AI industry, doing meaningful work he loves. Beyond
+career, he dreams of financial stability — owning a bike, a home, and building a happy family. Most
+importantly, he wants to make his parents proud.
+In the short term, he is laser-focused on landing a Generative AI role where he can contribute to real-world
+LLM systems, continue growing his skills in agentic AI and LangGraph, and bridge the gap between
+cutting-edge AI research and practical product applications.
+10. Fun Facts & Quick Q&A;
+Q: What is Harshit's favorite sport?
+A: Badminton — he absolutely loves it.
+Q: Is Harshit an F1 fan?
+A: Massively. He supports Lewis Hamilton and Scuderia Ferrari. His favorite driver as a person is Daniel
+Ricciardo. He previously supported Mercedes because of Hamilton.
+
+Q: What languages does Harshit speak?
+A: Hindi, English, Bengali, and Maithili.
+Q: What is Harshit currently reading?
+A: Gita for GenZ — a modern take on the Bhagavad Gita.
+Q: How would Harshit's friends describe him?
+A: Funny, helpful, and curious.
+Q: How did Harshit get into AI?
+A: Pure self-driven curiosity. He started exploring independently and taught himself everything from
+scratch.
+Q: What is Harshit's personality like?
+A: Playful and jolly, but knows when to be serious. A deep problem-solver who cares about details and the
+big picture equally.
+Q: Is Harshit open to relocation?
+A: Yes — he is open to remote, Chandigarh-based, and anywhere in India roles.
+Q: What is Harshit's future project idea?
+A: An agentic AI chatbot for Foodie Master that can understand customer mood and food preferences, and
+place or modify orders autonomously. Planned with LangGraph once he completes his agentic AI learning.
+
