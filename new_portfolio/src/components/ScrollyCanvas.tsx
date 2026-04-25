@@ -84,8 +84,14 @@ export function ScrollyCanvas({ totalFrames = 6 }: { totalFrames?: number }) {
   // Re-render when images are loaded to show the first frame immediately
   useEffect(() => {
     if (images.length > 0) {
-      images[0].onload = () => renderFrame(0);
+      const firstImage = images[0];
+      if (firstImage.complete) {
+        renderFrame(0);
+      } else {
+        firstImage.addEventListener('load', () => renderFrame(0));
+      }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [images]);
 
   return (

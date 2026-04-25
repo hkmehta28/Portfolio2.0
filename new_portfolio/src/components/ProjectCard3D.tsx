@@ -3,6 +3,7 @@
 import React, { useRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function ProjectCard3D({ project, onClick, index }: { project: any, onClick: () => void, index: number }) {
   const ref = useRef<HTMLDivElement>(null);
   

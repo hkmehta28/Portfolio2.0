@@ -46,11 +46,11 @@ export function Contact() {
               Contact
             </h2>
             <h3 className="text-5xl md:text-7xl font-extrabold text-white mb-8 tracking-tight leading-tight">
-              Let's build the <br />
+              Let&apos;s build the <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">future</span> together.
             </h3>
             <p className="text-xl text-gray-400 mb-12 font-light leading-relaxed max-w-lg">
-              I'm always open to discussing product design work or partnership opportunities. Reach out and let's craft something beautiful.
+              I&apos;m always open to discussing product design work or partnership opportunities. Reach out and let&apos;s craft something beautiful.
             </p>
 
             <a 

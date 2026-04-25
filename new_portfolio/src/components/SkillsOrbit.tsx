@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 
 const SKILLS = [
@@ -12,9 +12,11 @@ const SKILLS = [
 ];
 
 export function SkillsOrbit() {
-  // Generate random positions and animation properties for each skill
-  const floatingSkills = useMemo(() => {
-    return SKILLS.map((skill) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [floatingSkills, setFloatingSkills] = React.useState<any[]>([]);
+
+  React.useEffect(() => {
+    const skills = SKILLS.map((skill) => {
       // Random position within a 3D-like space (x, y coords as percentages)
       const randomX = Math.random() * 80 + 10; // 10% to 90%
       const randomY = Math.random() * 80 + 10; // 10% to 90%
@@ -35,6 +37,7 @@ export function SkillsOrbit() {
         isCore,
       };
     });
+    setFloatingSkills(skills);
   }, []);
 
   return (

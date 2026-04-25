@@ -37,9 +37,12 @@ export function Preloader() {
 
     // Safety fallback: Force load after 4 seconds regardless
     const fallbackTimer = setTimeout(() => {
-      if (progress < 100) {
-        completeLoading();
-      }
+      setProgress((prevProgress) => {
+        if (prevProgress < 100) {
+          completeLoading();
+        }
+        return prevProgress;
+      });
     }, 4000);
 
     return () => {

@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import StreamingResponse
 from fastapi.middleware.cors import CORSMiddleware
-from src.models import QuestionRequest, AnswerResponse
+from src.models import QuestionRequest
 from src.rag_engine import get_answer
 
 app = FastAPI(
@@ -23,10 +24,9 @@ def root():
     return {"status": "Harshit's RAG backend is running!"}
 
 
-@app.post("/ask", response_model=AnswerResponse)
-def ask(request: QuestionRequest):
+@app.post("/ask")
+async def ask(request: QuestionRequest):
     if not request.question.strip():
         raise HTTPException(status_code=400, detail="Question cannot be empty")
 
-    answer = get_answer(request.question)
-    return AnswerResponse(answer=answer)
+    return StreamingResponse(get_answer(request.question), media_type="text/plain")

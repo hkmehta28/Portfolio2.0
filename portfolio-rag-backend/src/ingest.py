@@ -7,14 +7,21 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+import shutil
+
 def ingest():
     loader = TextLoader("data/Harshit_Kumar_Mehta_RAG_KnowledgeBase.txt", encoding="utf-8")
     data = loader.load()
 
-    splitter = RecursiveCharacterTextSplitter(chunk_size=256, chunk_overlap=200)
+    splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
     chunks = splitter.split_documents(data)
     print(f'Total chunks created: {len(chunks)}')
     
+    # Clear old database to prevent appending duplicates or old chunk sizes
+    if os.path.exists("chroma_db"):
+        shutil.rmtree("chroma_db")
+        print("Cleared old database.")
+
     embeddings = OpenAIEmbeddings(model='text-embedding-3-small')
     db = Chroma.from_documents(chunks, embeddings, persist_directory="chroma_db")
     print("Database created")

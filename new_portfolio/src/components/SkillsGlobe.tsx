@@ -16,59 +16,60 @@ export function SkillsGlobe() {
   useEffect(() => {
     if (!containerRef.current) return;
 
-    let TagCloud: any;
-    try {
-      // We use require here to only load it on the client side
-      // since TagCloud needs the DOM to work.
-      TagCloud = require('TagCloud');
-    } catch (e) {
-      console.error("TagCloud failed to load", e);
-      return;
-    }
+    let isMounted = true;
+    const initTagCloud = async () => {
+      try {
+        const TagCloudModule = await import('TagCloud');
+        const TagCloud = TagCloudModule.default || TagCloudModule;
+        
+        if (!isMounted || !containerRef.current) return;
+        
+        const container = containerRef.current;
+        container.innerHTML = '';
 
-    const container = containerRef.current;
+        const options = {
+          radius: window.innerWidth < 768 ? 150 : 250,
+          maxSpeed: 'fast',
+          initSpeed: 'normal',
+          direction: 135, // Angle
+          keep: true, // Keep rotating when cursor leaves
+          useContainerInlineStyles: true,
+          useItemInlineStyles: true,
+        };
+
+        TagCloud(container, SKILLS, options);
+
+        const styleTags = () => {
+          const items = container.querySelectorAll('.tagcloud--item');
+          items.forEach((item) => {
+            const text = item.textContent;
+            const isCore = ["Python", "React.js", "Node.js", "LangChain", "OpenAI", "TypeScript", "RAG"].includes(text || "");
+            
+            item.className = 'tagcloud--item cursor-pointer font-medium transition-colors duration-300';
+            
+            if (isCore) {
+              item.classList.add('text-emerald-400', 'font-bold', 'hover:text-emerald-300', 'drop-shadow-[0_0_8px_rgba(16,185,129,0.5)]');
+            } else {
+              item.classList.add('text-gray-400', 'hover:text-white');
+            }
+          });
+        };
+
+        setTimeout(styleTags, 100);
+      } catch (e) {
+        console.error("TagCloud failed to load", e);
+      }
+    };
     
-    // Clear any existing instances to avoid duplicates in React strict mode
-    container.innerHTML = '';
+    initTagCloud();
 
-    const options = {
-      radius: window.innerWidth < 768 ? 150 : 250,
-      maxSpeed: 'fast',
-      initSpeed: 'normal',
-      direction: 135, // Angle
-      keep: true, // Keep rotating when cursor leaves
-      useContainerInlineStyles: true,
-      useItemInlineStyles: true,
-    };
 
-    // Initialize TagCloud
-    TagCloud(container, SKILLS, options);
-
-    // Style the generated tags directly via DOM manipulation
-    // since the library injects raw spans
-    const styleTags = () => {
-      const items = container.querySelectorAll('.tagcloud--item');
-      items.forEach((item) => {
-        const text = item.textContent;
-        // Core AI/Eng skills get Emerald, others get Grey/White
-        const isCore = ["Python", "React.js", "Node.js", "LangChain", "OpenAI", "TypeScript", "RAG"].includes(text || "");
-        
-        // Remove existing classes just in case
-        item.className = 'tagcloud--item cursor-pointer font-medium transition-colors duration-300';
-        
-        if (isCore) {
-          item.classList.add('text-emerald-400', 'font-bold', 'hover:text-emerald-300', 'drop-shadow-[0_0_8px_rgba(16,185,129,0.5)]');
-        } else {
-          item.classList.add('text-gray-400', 'hover:text-white');
-        }
-      });
-    };
-
-    // We need a slight delay for the TagCloud library to render the DOM elements
-    setTimeout(styleTags, 100);
 
     return () => {
-      container.innerHTML = ''; // Cleanup on unmount
+      isMounted = false;
+      if (containerRef.current) {
+        containerRef.current.innerHTML = ''; // Cleanup on unmount
+      }
     };
   }, []);
 
