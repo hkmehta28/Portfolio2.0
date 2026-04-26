@@ -37,7 +37,8 @@ export function SkillsGlobe() {
           useItemInlineStyles: true,
         };
 
-        TagCloud(container, SKILLS, options);
+        // @ts-ignore
+        (TagCloud as any)(container, SKILLS, options);
 
         const styleTags = () => {
           const items = container.querySelectorAll('.tagcloud--item');
