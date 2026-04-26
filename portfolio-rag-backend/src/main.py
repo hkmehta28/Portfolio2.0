@@ -40,4 +40,12 @@ async def ask(request: QuestionRequest):
     if not request.question.strip():
         raise HTTPException(status_code=400, detail="Question cannot be empty")
 
-    return StreamingResponse(get_answer(request.question), media_type="text/plain")
+    return StreamingResponse(
+        get_answer(request.question), 
+        media_type="text/plain",
+        headers={
+            "X-Accel-Buffering": "no",  # Disable buffering for Nginx/Proxies
+            "Cache-Control": "no-cache",
+            "Connection": "keep-alive",
+        }
+    )

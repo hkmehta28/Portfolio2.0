@@ -9,18 +9,19 @@ load_dotenv()
 import asyncio
 from typing import AsyncGenerator
 
-async def get_answer(question: str) -> AsyncGenerator[str, None]:
-    embeddings = OpenAIEmbeddings(model='text-embedding-3-small')
-    db = Chroma(
-        persist_directory="chroma_db", 
-        embedding_function=embeddings
-    )
-    
-    llm = ChatOpenAI(
-        model="gpt-3.5-turbo"
-    )
+# Initialize embeddings and DB globally to avoid reloading on every request
+embeddings = OpenAIEmbeddings(model='text-embedding-3-small')
+db = Chroma(
+    persist_directory="chroma_db", 
+    embedding_function=embeddings
+)
+llm = ChatOpenAI(
+    model="gpt-3.5-turbo",
+    streaming=True
+)
+retriever = db.as_retriever(search_kwargs={"k": 12})
 
-    retriever = db.as_retriever(search_kwargs={"k": 12})
+async def get_answer(question: str) -> AsyncGenerator[str, None]:
 
     prompt = ChatPromptTemplate.from_messages([
         ("system", """You are Harshit Kumar Mehta's highly professional and intelligent AI portfolio assistant.
@@ -49,6 +50,4 @@ Context:
     
     async for chunk in llm.astream(prompt.format_messages(context=context, question=question)):
         if chunk.content:
-            for char in chunk.content:
-                yield char
-                await asyncio.sleep(0.01)
+            yield chunk.content
