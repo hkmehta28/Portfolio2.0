@@ -112,7 +112,7 @@ export function Chatbot() {
     setIsTyping(true);
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/ask", {
+      const response = await fetch("https://portfolio2-0-q4d6.onrender.com/ask", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
