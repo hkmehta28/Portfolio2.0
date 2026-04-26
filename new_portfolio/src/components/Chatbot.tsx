@@ -50,7 +50,7 @@ export function Chatbot() {
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages, isTyping, isOpen, displayedInitText]);
+  }, [isTyping, isOpen, displayedInitText]); // Removed 'messages' to prevent jumping during streaming
 
   // Auto-focus input when chat opens or when bot finishes typing
   useEffect(() => {

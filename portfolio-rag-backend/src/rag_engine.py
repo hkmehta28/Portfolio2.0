@@ -50,4 +50,5 @@ Context:
     
     async for chunk in llm.astream(prompt.format_messages(context=context, question=question)):
         if chunk.content:
-            yield chunk.content
+            for char in chunk.content:
+                yield char
