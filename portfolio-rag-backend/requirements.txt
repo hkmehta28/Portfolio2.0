@@ -5,3 +5,4 @@ langchain-community
 langchain-openai
 chromadb
 python-dotenv
+pysqlite3-binary

@@ -21,6 +21,7 @@ export function Chatbot() {
   const [inputValue, setInputValue] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
   const isUserScrolledUp = useRef(false);
 
@@ -50,6 +51,17 @@ export function Chatbot() {
   useEffect(() => {
     scrollToBottom();
   }, [messages, isTyping, isOpen, displayedInitText]);
+
+  // Auto-focus input when chat opens or when bot finishes typing
+  useEffect(() => {
+    if (isOpen && !isTyping) {
+      // Small timeout to ensure the element is enabled and animation has settled
+      const timer = setTimeout(() => {
+        inputRef.current?.focus();
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [isOpen, isTyping]);
 
   // Tooltip Appearance Timer
   useEffect(() => {
@@ -271,6 +283,7 @@ export function Chatbot() {
             <div className="p-3 border-t border-white/10 bg-black/20">
               <form onSubmit={handleSendMessage} className="relative flex items-center">
                 <input
+                  ref={inputRef}
                   type="text"
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
