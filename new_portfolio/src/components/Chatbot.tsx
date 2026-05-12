@@ -111,8 +111,12 @@ export function Chatbot() {
     setInputValue("");
     setIsTyping(true);
 
+    const API_URL = window.location.hostname === "localhost" 
+      ? "http://127.0.0.1:8000" 
+      : "https://portfolio2-0-q4d6.onrender.com";
+
     try {
-      const response = await fetch("https://portfolio2-0-q4d6.onrender.com/ask", {
+      const response = await fetch(`${API_URL}/ask`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -129,7 +133,7 @@ export function Chatbot() {
       const reader = response.body.getReader();
       const decoder = new TextDecoder();
       let done = false;
-      let text = "";
+      let fullText = "";
 
       const botMessageId = (Date.now() + 1).toString();
       let isFirstChunk = true;
@@ -139,28 +143,58 @@ export function Chatbot() {
         done = readerDone;
         if (value) {
           const chunkValue = decoder.decode(value, { stream: true });
-          text += chunkValue;
           
-          if (isFirstChunk) {
-            setIsTyping(false); 
-            setMessages((prev) => [
-              ...prev,
-              { id: botMessageId, sender: "bot", text: text },
-            ]);
-            isFirstChunk = false;
-          } else {
-            setMessages((prev) => 
-              prev.map((msg) => 
-                msg.id === botMessageId ? { ...msg, text: text } : msg
-              )
-            );
+          // Parse SSE format
+          const lines = chunkValue.split('\n');
+          let parsedChunk = "";
+          for (const line of lines) {
+            if (line.startsWith('data: ')) {
+              try {
+                parsedChunk += JSON.parse(line.substring(6));
+              } catch (e) {
+                // Ignore incomplete or malformed JSON
+              }
+            }
+          }
+          
+          // To guarantee a streaming look even if the network buffers,
+          // we "type" out the characters on the frontend.
+          for (const char of parsedChunk) {
+            fullText += char;
+            
+            if (isFirstChunk) {
+              setMessages((prev) => [
+                ...prev,
+                { id: botMessageId, sender: "bot", text: fullText },
+              ]);
+              isFirstChunk = false;
+              
+              // On the very first character, scroll to ensure the bot message is visible
+              setTimeout(() => {
+                const container = messagesContainerRef.current;
+                if (container) {
+                  container.scrollTo({
+                    top: container.scrollHeight,
+                    behavior: 'smooth'
+                  });
+                }
+              }, 100);
+            } else {
+              setMessages((prev) => 
+                prev.map((msg) => 
+                  msg.id === botMessageId ? { ...msg, text: fullText } : msg
+                )
+              );
+            }
+            
+            // Artificial delay to make it look smooth
+            await new Promise(resolve => setTimeout(resolve, 8));
           }
         }
       }
 
-      if (isFirstChunk && done) {
-        throw new Error("Empty response from server");
-      }
+      setIsTyping(false); // Only stop typing once the WHOLE stream is finished and typed out
+
     } catch (error) {
       console.error("Chatbot API Error:", error);
       const errorResponse: Message = {
@@ -229,7 +263,7 @@ export function Chatbot() {
                   className={`flex ${msg.sender === "user" ? "justify-end" : "justify-start"}`}
                 >
                   <div
-                    className={`max-w-[85%] p-3 rounded-2xl text-sm leading-relaxed shadow-sm ${
+                    className={`whitespace-pre-wrap max-w-[85%] p-3 rounded-2xl text-sm leading-relaxed shadow-sm ${
                       msg.sender === "user"
                         ? "bg-emerald-500 text-white rounded-br-none"
                         : "bg-white/10 text-gray-200 border border-white/5 rounded-bl-none"

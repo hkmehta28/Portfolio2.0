@@ -1,5 +1,6 @@
 Harshit Kumar Mehta
 Generative AI Engineer | Final-Year B.Tech CSE | Chandigarh University
+
 1. Identity & Contact Information
 Full Name: Harshit Kumar Mehta
 Location: Chandigarh, India
@@ -8,6 +9,8 @@ Email: hkmehta2874@gmail.com
 GitHub: github.com/hkmehta28
 LinkedIn: linkedin.com/in/hkmehta28
 Portfolio: https://portfolio2-0-eta-blue.vercel.app/
+
+
 2. Who Is Harshit — Personal Bio
 Harshit is a final-year Computer Science & Engineering student at Chandigarh University who identifies as
 a Generative AI Engineer. He is a playful, jolly person who knows when to be serious. He is funny, helpful,
@@ -19,13 +22,16 @@ projects.
 He speaks four languages: Hindi, English, Bengali, and Maithili.
 Currently reading: Gita for GenZ — a modern retelling of the Bhagavad Gita. He enjoys self-help and
 personal development books, tech non-fiction, and fiction novels.
+
+
 3. Personality, Interests & Hobbies
 Personality
-(cid:127) Playful and jolly, but understands seriousness when needed
-(cid:127) Fast learner who is largely self-taught
-(cid:127) Problem-solver who digs deep rather than surface-skimming
-(cid:127) Team collaborator but also capable of working independently
-(cid:127) Detail-oriented with a big-picture mindset
+Playful and jolly, but understands seriousness when needed
+Fast learner who is largely self-taught
+Problem-solver who digs deep rather than surface-skimming
+Team collaborator but also capable of working independently
+Detail-oriented with a big-picture mindset
+
 Hobbies
 Harshit's biggest passion outside of coding is Badminton — he loves it. He also reads books across
 genres and is completely obsessed with Formula 1 racing.
@@ -35,12 +41,15 @@ Harshit is a massive Formula 1 fan. His favorite driver as a person is Daniel Ri
 charisma and infectious smile. He supports Lewis Hamilton and the Scuderia Ferrari team. He previously
 supported Mercedes due to his admiration for Hamilton, and switched allegiance to Ferrari when Hamilton
 made the historic move.
+
+
 4. Professional Profile
 Harshit is a Generative AI Engineer and final-year Computer Science undergraduate specializing in Large
 Language Models (LLMs), Retrieval-Augmented Generation (RAG), and NLP-based AI applications. He is
 experienced in designing scalable AI systems using LangChain, OpenAI GPT models, vector databases,
 and RESTful APIs. He has a strong foundation in backend development, semantic search,
 embedding-based retrieval, and full-stack architecture.
+
 His core philosophy: elegant engineering solves complex problems.
 Job Seeking Status
 Actively applying and available immediately for the right opportunity.
@@ -48,6 +57,8 @@ Open to: Remote, On-site in Chandigarh/nearby, On-site anywhere in India (reloca
 and Full-time roles.
 Target roles: Generative AI Engineer, AI Engineer, LLM Engineer, and related positions in any company
 working in the AI/GenAI space.
+
+
 5. Technical Skills
 Programming Languages: Python, JavaScript, C++, Java
 AI & LLM Technologies: LangChain, OpenAI API, RAG (Retrieval-Augmented Generation), Embeddings,
@@ -58,31 +69,25 @@ Databases: PostgreSQL, SQL, Pinecone, ChromaDB
 Tools & Platforms: Git, GitHub, Swagger/OpenAPI, Vercel
 Currently Learning: LangGraph, HuggingFace Transformers, FastAPI, Docker, Cloud platforms
 (AWS/Azure/GCP)
-6. Projects
-6.1 Intelligent Document Q&A; System (RAG-Based LLM Application)
 
+
+6. Projects
+
+6.1 Intelligent Document Q&A; System (RAG-Based LLM Application)
 This was Harshit's personal idea — built because he wanted hands-on experience with RAG after learning
-the concepts. He wanted to build something real and impactful, not just a tutorial project.
-(cid:127) Architected a RAG system using LangChain and OpenAI GPT APIs to enable context-aware question
-answering across 100+ documents.
-(cid:127) Engineered an end-to-end ingestion pipeline processing 10,000+ text chunks with semantic chunking
-and embedding generation using Pinecone and ChromaDB.
-(cid:127) Optimized embedding-based semantic search with dynamic context injection, improving response
-relevance by 30% and reducing hallucinated outputs.
-(cid:127) Integrated conversational memory and real-time query handling through Streamlit, reducing query
-latency by 25%.
+the concepts. He wanted to build something real and impactful, not just a tutorial project.Architected a RAG system using LangChain and OpenAI GPT APIs to enable context-aware question answering across 100+ documents.
+Engineered an end-to-end ingestion pipeline processing 10,000+ text chunks with semantic chunking and embedding generation using Pinecone and ChromaDB.
+Optimized embedding-based semantic search with dynamic context injection, improving response relevance by 30% and reducing hallucinated outputs.
+Integrated conversational memory and real-time query handling through Streamlit, reducing query latency by 25%.
 Tech Stack: LangChain, OpenAI API, Pinecone, ChromaDB, Streamlit, Python
+
 6.2 Conversational AI & Text Summarization System
 Built to demonstrate multi-turn conversational AI capabilities and automated summarization pipelines — a
-use case directly relevant to enterprise content workflows.
-(cid:127) Built a multi-turn conversational AI application supporting 50+ concurrent queries using LangChain
-and GPT APIs.
-(cid:127) Orchestrated modular LLM chains to automate summarization workflows, reducing manual content
-processing time by 40%.
-(cid:127) Enhanced semantic accuracy through prompt engineering, improving contextual response
-consistency by 20%.
-(cid:127) Structured scalable LLM pipelines enabling modular AI deployment across multiple use cases.
+use case directly relevant to enterprise content workflows. Built a multi-turn conversational AI application supporting 50+ concurrent queries using LangChain
+and GPT APIs. Orchestrated modular LLM chains to automate summarization workflows, reducing manual content
+processing time by 40%. Enhanced semantic accuracy through prompt engineering, improving contextual response consistency by 20%. Structured scalable LLM pipelines enabling modular AI deployment across multiple use cases.
 Tech Stack: LangChain, OpenAI GPT APIs, Python, Streamlit
+
 6.3 Foodie Master (Full-Stack Web Application)
 A group project for an online food ordering platform — Harshit handled the full-stack architecture and API
 design. He has a future vision for this project: building an agentic AI chatbot that understands customer

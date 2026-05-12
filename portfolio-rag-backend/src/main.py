@@ -40,9 +40,14 @@ async def ask(request: QuestionRequest):
     if not request.question.strip():
         raise HTTPException(status_code=400, detail="Question cannot be empty")
 
+    import json
+    async def stream():
+        async for token in get_answer(request.question):
+            yield f"data: {json.dumps(token)}\n\n"
+
     return StreamingResponse(
-        get_answer(request.question), 
-        media_type="text/plain",
+        stream(), 
+        media_type="text/event-stream",
         headers={
             "X-Accel-Buffering": "no",  # Disable buffering for Nginx/Proxies
             "Cache-Control": "no-cache",
