@@ -1,3 +1,11 @@
+import sys
+try:
+    __import__('pysqlite3')
+    sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+except ImportError:
+    pass
+
+
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import StreamingResponse
 from fastapi.middleware.cors import CORSMiddleware
@@ -5,12 +13,6 @@ from src.models import QuestionRequest
 from src.rag_engine import get_answer
 
 # ── Fix for SQLite version on Render (required for ChromaDB) ──
-import sys
-try:
-    __import__('pysqlite3')
-    sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
-except ImportError:
-    pass
 
 app = FastAPI(
     title="Harshit's Portfolio RAG API",

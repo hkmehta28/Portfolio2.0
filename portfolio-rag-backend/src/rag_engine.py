@@ -1,4 +1,7 @@
 import os
+import asyncio
+from typing import AsyncGenerator
+
 from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from langchain_community.vectorstores import Chroma
 from langchain_core.prompts import ChatPromptTemplate
@@ -7,9 +10,6 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from dotenv import load_dotenv
 
 load_dotenv()
-
-import asyncio
-from typing import AsyncGenerator
 
 # Initialize embeddings and DB globally to avoid reloading on every request
 llm = ChatOpenAI(
